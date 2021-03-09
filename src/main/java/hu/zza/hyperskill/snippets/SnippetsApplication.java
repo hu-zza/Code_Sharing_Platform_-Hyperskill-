@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SnippetsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SnippetsApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(SnippetsApplication.class, args);
+  }
 
 }
