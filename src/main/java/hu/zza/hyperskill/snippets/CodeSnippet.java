@@ -15,16 +15,12 @@ import javax.persistence.Id;
 @JsonIgnoreProperties({"id", "uuid", "viewCount"})
 public class CodeSnippet {
 
-  private static final DateTimeFormatter FORMATTER = DateTimeFormatter
-      .ofPattern("uuuu/MM/dd HH:mm:ss");
+  private static final DateTimeFormatter FORMATTER =
+      DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
 
   // Not for JSON...
-  @Id
-  @GeneratedValue
-  private long id = 0L;
-  private String uuid = UUID
-      .randomUUID()
-      .toString();
+  @Id @GeneratedValue private long id = 0L;
+  private String uuid = UUID.randomUUID().toString();
   private long viewCount = 0L;
 
   // JSON attributes
@@ -42,9 +38,7 @@ public class CodeSnippet {
     if (time == 0) {
       return 0;
     }
-    long elapsedSeconds = Duration
-        .between(date, LocalDateTime.now())
-        .getSeconds();
+    long elapsedSeconds = Duration.between(date, LocalDateTime.now()).getSeconds();
     return time > elapsedSeconds ? time - elapsedSeconds : 0;
   }
 
@@ -58,9 +52,7 @@ public class CodeSnippet {
 
   @JsonIgnore
   public boolean isAccessible() {
-    long elapsedSeconds = Duration
-        .between(date, LocalDateTime.now())
-        .getSeconds();
+    long elapsedSeconds = Duration.between(date, LocalDateTime.now()).getSeconds();
 
     return (views == 0 || views > viewCount) && (time == 0 || time > elapsedSeconds);
   }

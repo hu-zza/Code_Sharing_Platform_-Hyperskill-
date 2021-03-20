@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @RestController
 public class ApiController {
 
@@ -35,8 +34,7 @@ public class ApiController {
   ResponseEntity<Map<String, String>> createCodeSnippet(@RequestBody CodeSnippet codeSnippet) {
     var snippet = repository.save(codeSnippet);
 
-    return ResponseEntity
-        .ok()
+    return ResponseEntity.ok()
         .headers(RESPONSE_HEADERS)
         .body(Map.of("id", String.valueOf(snippet.getUuid())));
   }
@@ -52,15 +50,12 @@ public class ApiController {
         codeSnippet.increaseViewCount();
         codeSnippet = repository.save(codeSnippet);
 
-        return ResponseEntity
-            .ok()
-            .headers(RESPONSE_HEADERS)
-            .body(repository.save(codeSnippet));
+        return ResponseEntity.ok().headers(RESPONSE_HEADERS).body(repository.save(codeSnippet));
       }
     }
 
-    throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-        String.format("This UUID (%s) is not exist.", uuid));
+    throw new ResponseStatusException(
+        HttpStatus.NOT_FOUND, String.format("This UUID (%s) is not exist.", uuid));
   }
 
   @GetMapping("/api/code/latest")
@@ -70,9 +65,6 @@ public class ApiController {
     snippetList.forEach(CodeSnippet::increaseViewCount);
     repository.saveAll(snippetList);
 
-    return ResponseEntity
-        .ok()
-        .headers(RESPONSE_HEADERS)
-        .body(snippetList);
+    return ResponseEntity.ok().headers(RESPONSE_HEADERS).body(snippetList);
   }
 }
