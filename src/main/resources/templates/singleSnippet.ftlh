@@ -12,19 +12,17 @@
   <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-<#if snippet.getDate()??>
-<p><span id="load_date">${snippet.getDate()}</span></p>
-</
-#if>
-<#if snippet.isRestrictedByViews()>
-<p><span id="views_restriction">${snippet.getViews()} more views allowed</span></p>
-</#if>
-<#if snippet.isRestrictedByTime()>
-<p><span id="time_restriction">The code will be available for ${snippet.getTime()} seconds</span>
-</p>
-</#if>
-<#if snippet.getCode()??>
-<pre id="code_snippet"><code>${snippet.getCode()}</code></pre>
-</#if>
+  <#if snippet.getDate()??>
+    <p><span id="load_date">${snippet.getDate()}</span></p>
+  </#if>
+  <#if snippet.isRestrictedByViews()>
+    <p><span id="views_restriction">${snippet.getViews()} more views allowed</span></p>
+  </#if>
+  <#if snippet.isRestrictedByTime()>
+    <p><span id="time_restriction">The code will be available for ${snippet.getTime()} seconds</span></p>
+  </#if>
+  <#if snippet.getCode()??>
+    <pre id="code_snippet"><code>${snippet.getCode()}</code></pre>
+  </#if>
 </body>
 </html>

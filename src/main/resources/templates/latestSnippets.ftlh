@@ -12,11 +12,10 @@
   <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-<#list latestList as snippet>
-<p><span id="load_date_${snippet?counter}">${snippet.getDate()}</span></p>
-<pre id="code_snippet_${snippet?counter}"><code>${snippet.getCode()}</code></pre>
-<br>
-</
-#list>
+  <#list latestList as snippet>
+    <p><span id="load_date_${snippet?counter}">${snippet.getDate()}</span></p>
+    <pre id="code_snippet_${snippet?counter}"><code>${snippet.getCode()}</code></pre>
+    <br>
+  </#list>
 </body>
 </html>

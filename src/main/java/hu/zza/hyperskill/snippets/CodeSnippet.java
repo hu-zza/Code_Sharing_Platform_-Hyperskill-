@@ -31,8 +31,6 @@ public class CodeSnippet {
   private long time = 0L;
   private long views = 0L;
 
-  // GENERATED GETTERS
-
   @JsonGetter("time")
   public long getTime() {
     if (time == 0) {
@@ -67,8 +65,6 @@ public class CodeSnippet {
     return 0 < time;
   }
 
-  // USUAL GETTERS
-
   public long getId() {
     return id;
   }
@@ -84,8 +80,6 @@ public class CodeSnippet {
   public String getDate() {
     return date.format(FORMATTER);
   }
-
-  // INSTANCE METHODS
 
   public void increaseViewCount() {
     viewCount += 1;

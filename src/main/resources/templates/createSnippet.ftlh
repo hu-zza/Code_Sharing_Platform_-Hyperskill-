@@ -39,9 +39,6 @@
                     alert("Failure")
                 }
             }
-
-
-
 </script>
 </body>
 </html>

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
+@RequestMapping("/code")
 public class ViewController {
 
   private final CodeSnippetRepository repository;
@@ -19,12 +21,12 @@ public class ViewController {
     this.repository = repository;
   }
 
-  @GetMapping("/code/new")
+  @GetMapping("/new")
   private String getSendingFormView() {
     return "createSnippet";
   }
 
-  @GetMapping("/code/{uuid}")
+  @GetMapping("/{uuid}")
   private String getByIdView(@PathVariable String uuid, Model model) {
     var optionalCodeSnippet = repository.findByUuid(uuid);
 
@@ -43,7 +45,7 @@ public class ViewController {
         HttpStatus.NOT_FOUND, String.format("This UUID (%s) is not exist.", uuid));
   }
 
-  @GetMapping("/code/latest")
+  @GetMapping("/latest")
   private String getLatest10View(Model model) {
     List<CodeSnippet> snippetList = repository.findLatest10();
 

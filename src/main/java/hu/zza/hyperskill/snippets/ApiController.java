@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@RequestMapping("/api/code")
 public class ApiController {
 
   public static final HttpHeaders RESPONSE_HEADERS = new HttpHeaders();
@@ -30,7 +32,7 @@ public class ApiController {
     this.repository = repository;
   }
 
-  @PostMapping("/api/code/new")
+  @PostMapping("/new")
   ResponseEntity<Map<String, String>> createCodeSnippet(@RequestBody CodeSnippet codeSnippet) {
     var snippet = repository.save(codeSnippet);
 
@@ -39,7 +41,7 @@ public class ApiController {
         .body(Map.of("id", String.valueOf(snippet.getUuid())));
   }
 
-  @GetMapping("/api/code/{uuid}")
+  @GetMapping("/{uuid}")
   ResponseEntity<CodeSnippet> getByIdAsJson(@PathVariable String uuid) {
     var optionalCodeSnippet = repository.findByUuid(uuid);
 
@@ -58,7 +60,7 @@ public class ApiController {
         HttpStatus.NOT_FOUND, String.format("This UUID (%s) is not exist.", uuid));
   }
 
-  @GetMapping("/api/code/latest")
+  @GetMapping("/latest")
   ResponseEntity<List<CodeSnippet>> getLatest10AsJson() {
     List<CodeSnippet> snippetList = repository.findLatest10();
 
