@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./code_snippets
+    driverClassName: org.h2.Driver
+    username: hu.zza
+    password: 010101
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: update
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        trace: false
+        web-allow-others: false
