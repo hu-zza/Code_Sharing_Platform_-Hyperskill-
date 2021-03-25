@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/code")
@@ -54,7 +53,7 @@ public class ApiController {
       }
     }
 
-    throw new ResponseStatusException(
+    throw new SnippetNotFoundException(
         HttpStatus.NOT_FOUND, String.format("This UUID (%s) is not exist.", uuid));
   }
 

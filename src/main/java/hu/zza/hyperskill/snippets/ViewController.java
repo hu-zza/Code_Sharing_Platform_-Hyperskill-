@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/code")
@@ -55,14 +54,15 @@ public class ViewController {
         return "singleSnippet";
       }
     }
-    throw new ResponseStatusException(
+
+    throw new SnippetNotFoundException(
         HttpStatus.NOT_FOUND, String.format("This UUID (%s) is not exist.", uuid));
   }
 
   @GetMapping("/latest")
   private String getLatest10View(Map<String, Object> model) {
     List<CodeSnippet> latestTenSnippets = repository.findLatest10();
-    int a = 0 / 0;
+
     latestTenSnippets.forEach(CodeSnippet::increaseViewCount);
     repository.saveAll(latestTenSnippets);
 
