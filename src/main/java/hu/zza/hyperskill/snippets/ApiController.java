@@ -36,9 +36,7 @@ public class ApiController {
   ResponseEntity<Map<String, String>> createCodeSnippet(@RequestBody CodeSnippet codeSnippet) {
     var snippet = repository.save(codeSnippet);
 
-    return ResponseEntity.ok()
-        .headers(RESPONSE_HEADERS)
-        .body(Map.of("id", String.valueOf(snippet.getUuid())));
+    return ResponseEntity.ok(Map.of("id", String.valueOf(snippet.getUuid())));
   }
 
   @GetMapping("/{uuid}")
@@ -52,7 +50,7 @@ public class ApiController {
         codeSnippet.increaseViewCount();
         codeSnippet = repository.save(codeSnippet);
 
-        return ResponseEntity.ok().headers(RESPONSE_HEADERS).body(repository.save(codeSnippet));
+        return ResponseEntity.ok(codeSnippet);
       }
     }
 
@@ -67,6 +65,6 @@ public class ApiController {
     snippetList.forEach(CodeSnippet::increaseViewCount);
     repository.saveAll(snippetList);
 
-    return ResponseEntity.ok().headers(RESPONSE_HEADERS).body(snippetList);
+    return ResponseEntity.ok(snippetList);
   }
 }

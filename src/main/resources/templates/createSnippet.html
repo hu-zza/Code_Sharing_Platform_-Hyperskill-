@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Create snippet | Code Sharing Platform</title>
+  </head>
+  <body>
+    <form action="" th:action="@{/code/new}" method="post" th:object="${newSnippet}">
+      <label for="code">Code:</label>
+      <br>
+      <textarea id="code" th:field="*{code}"></textarea>
+      <br><br>
+      <label for="time">Time limit:</label>
+      <input id="time" th:field="*{time}" type="number">
+      <br>
+      <label for="views">View limit:</label>
+      <input id="views" th:field="*{views}" type="number">
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>

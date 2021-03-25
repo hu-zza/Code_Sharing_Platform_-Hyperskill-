@@ -1,12 +1,13 @@
 package hu.zza.hyperskill.snippets;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,13 +22,26 @@ public class ViewController {
     this.repository = repository;
   }
 
+  @GetMapping
+  private String getIndexView() {
+    return "index";
+  }
+
   @GetMapping("/new")
-  private String getSendingFormView() {
+  private String getSendingFormView(Map<String, Object> model) {
+    model.put("newSnippet", new CodeSnippet());
     return "createSnippet";
   }
 
+  @PostMapping("/new")
+  private String createCodeSnippet(CodeSnippet newSnippet) {
+    var snippet = repository.save(newSnippet);
+    // TODO return snippet.getUuid()
+    return "redirect:new";
+  }
+
   @GetMapping("/{uuid}")
-  private String getByIdView(@PathVariable String uuid, Model model) {
+  private String getByIdView(@PathVariable String uuid, Map<String, Object> model) {
     var optionalCodeSnippet = repository.findByUuid(uuid);
 
     if (optionalCodeSnippet.isPresent()) {
@@ -37,7 +51,7 @@ public class ViewController {
         codeSnippet.increaseViewCount();
         codeSnippet = repository.save(codeSnippet);
 
-        model.addAttribute("snippet", codeSnippet);
+        model.put("snippet", codeSnippet);
         return "singleSnippet";
       }
     }
@@ -46,13 +60,13 @@ public class ViewController {
   }
 
   @GetMapping("/latest")
-  private String getLatest10View(Model model) {
-    List<CodeSnippet> snippetList = repository.findLatest10();
+  private String getLatest10View(Map<String, Object> model) {
+    List<CodeSnippet> latestTenSnippets = repository.findLatest10();
 
-    snippetList.forEach(CodeSnippet::increaseViewCount);
-    repository.saveAll(snippetList);
+    latestTenSnippets.forEach(CodeSnippet::increaseViewCount);
+    repository.saveAll(latestTenSnippets);
 
-    model.addAttribute("latestList", snippetList);
+    model.put("latestTenSnippets", latestTenSnippets);
     return "latestSnippets";
   }
 }

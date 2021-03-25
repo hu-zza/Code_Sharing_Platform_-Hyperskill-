@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Snippet | Code Sharing Platform</title>
+    <link
+        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css"
+        rel="stylesheet">
+    <script
+        src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+      <p th:if="${snippet.date}">
+        <span id="load_date" th:text="${snippet.date}"></span>
+      </p>
+      <p th:if="${snippet.isRestrictedByViews()}">
+        <span id="views_restriction" th:text="${snippet.views} + ' more views allowed'"></span>
+      </p>
+      <p th:if="${snippet.isRestrictedByTime()}">
+        <span id="time_restriction" th:text="'The code will be available for ' + ${snippet.time} + ' seconds'"></span>
+      </p>
+      <p th:if="${snippet.code}">
+        <pre id="code_snippet"><code th:text="${snippet.code}"></code></pre>
+      </p>
+  </body>
+</html>

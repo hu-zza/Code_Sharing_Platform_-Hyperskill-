@@ -31,6 +31,7 @@ public class CodeSnippet {
   private long time = 0L;
   private long views = 0L;
 
+
   @JsonGetter("time")
   public long getTime() {
     if (time == 0) {
@@ -40,12 +41,20 @@ public class CodeSnippet {
     return time > elapsedSeconds ? time - elapsedSeconds : 0;
   }
 
+  public void setTime(long time) {
+    this.time = time;
+  }
+
   @JsonGetter("views")
   public long getViews() {
     if (views == 0) {
       return 0;
     }
     return views > viewCount ? views - viewCount : 0;
+  }
+
+  public void setViews(long views) {
+    this.views = views;
   }
 
   @JsonIgnore
@@ -73,8 +82,14 @@ public class CodeSnippet {
     return uuid;
   }
 
+  // For the sake of Thymeleaf
+
   public String getCode() {
     return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
   }
 
   public String getDate() {
