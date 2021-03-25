@@ -22,6 +22,7 @@ public class ViewController {
     this.repository = repository;
   }
 
+  // Without argument this maps "/" and "/code" at the same time...
   @GetMapping
   private String getIndexView() {
     return "index";
@@ -36,8 +37,7 @@ public class ViewController {
   @PostMapping("/new")
   private String createCodeSnippet(CodeSnippet newSnippet) {
     var snippet = repository.save(newSnippet);
-    // TODO return snippet.getUuid()
-    return "redirect:new";
+    return String.format("redirect:/code/%s", snippet.getUuid());
   }
 
   @GetMapping("/{uuid}")
@@ -62,7 +62,7 @@ public class ViewController {
   @GetMapping("/latest")
   private String getLatest10View(Map<String, Object> model) {
     List<CodeSnippet> latestTenSnippets = repository.findLatest10();
-
+    int a = 0 / 0;
     latestTenSnippets.forEach(CodeSnippet::increaseViewCount);
     repository.saveAll(latestTenSnippets);
 

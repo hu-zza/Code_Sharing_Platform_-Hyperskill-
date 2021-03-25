@@ -31,7 +31,6 @@ public class CodeSnippet {
   private long time = 0L;
   private long views = 0L;
 
-
   @JsonGetter("time")
   public long getTime() {
     if (time == 0) {
