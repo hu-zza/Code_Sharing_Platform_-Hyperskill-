@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ public class CodeSnippet {
   private long viewCount = 0L;
 
   // JSON attributes
+  @Column(columnDefinition = "text")
   private String code = "";
   private LocalDateTime date = LocalDateTime.now();
 
