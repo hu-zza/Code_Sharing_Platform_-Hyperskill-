@@ -1,3 +1,7 @@
+body {
+  --bs-body-bg: #333;
+}
+
 div.snippets > div {
   position: relative;
   margin: 10px 0 50px;
@@ -48,5 +52,5 @@ div.dropdown button.dropdown-toggle::after {
 div.snippets div.btn-group button {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border-color: #f0f0f0;
+  border-color: #221a0f;
 }
