@@ -1,3 +1,52 @@
-pre {
-  box-shadow: 5px 5px grey;
+div.snippets > div {
+  position: relative;
+  margin: 10px 0 50px;
+}
+
+
+div.snippets button.headTag {
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+
+div.snippetActions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+div.btn-group {
+  display: none;
+}
+
+
+@media screen and (min-width: 576px) {
+  div.dropdown {
+    display: none;
+  }
+
+  div.btn-group {
+    display: inline-flex;
+  }
+}
+
+
+div.dropdown button.dropdown-toggle {
+  min-width: 60px;
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+div.dropdown ul.dropdown-menu {
+  min-width: 60px;
+}
+
+div.dropdown button.dropdown-toggle::after {
+  display: none;
+}
+
+
+div.snippets div.btn-group button {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-color: #f0f0f0;
 }

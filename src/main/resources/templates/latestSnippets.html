@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" th:href="@{'/style.css'}" href="../static/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <title>Latest snippets | Code Sharing Platform</title>
@@ -17,17 +17,293 @@
   <body>
     <div class="container-lg">
       <div class="row">
-        <div class="col-2"></div>
+        <div class="col-1"></div>
 
-        <div class="col-8">
+        <div class="col-10 snippets">
           <div th:each="snippet : ${latestTenSnippets}">
-            <p><span th:id="'load_date_' + ${snippetStat.count}" th:text="${snippet.date}"></span></p>
-            <pre th:id="'code_snippet_' + ${snippetStat.count}"><code th:text="${snippet.code}"></code></pre>
-            <br>
+            <button type="button" class="btn btn-dark headTag" th:id="'load_date_' + ${snippetStat.count}" th:text="${snippet.date}">2021/08/14 22:22:22</button>
+
+            <div class="btn-group snippetActions"role="group" th:replace="snippetActions :: buttonGroup" aria-label="Snippet actions">
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+              <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+              <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+              <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+            </div>
+            <pre th:id="'code_snippet_' + ${snippetStat.count}"><code th:text="${snippet.code}">public static void main(String... args) {
+  System.out.println(&quot;hu-zza!&quot;);
+}</code></pre>
+          </div>
+
+          <div th:remove="all">
+            <button type="button" class="btn btn-dark headTag" id="load_date_1">2021/08/14 21:54:45</button>
+
+            <div class="btn-group snippetActions"role="group" aria-label="Snippet actions">
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+              <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+              <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+              <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+            </div>
+            <pre id="code_snippet_1"><code>$(&quot;button&quot;).click(addTodoItem);
+  
+  let i = 0;
+  
+  function addTodoItem() {
+    $(&quot;table&quot;)
+      .append(`&lt;tr id=&quot;task_${i}&quot;&gt;&lt;/tr&gt;`)
+    
+    $(&quot;table tr:last-child&quot;)
+      .append(`&lt;td onClick=&quot;toggleTaskMark(${i})&quot;&gt;${$(&quot;input&quot;).val()}&lt;/td&gt;`)
+      .append(`&lt;td onClick=&quot;deleteTask(${i})&quot;&gt;&lt;i class=&quot;fas fa-times-circle&quot;&gt;&lt;/i&gt;&lt;/td&gt;`)
+      .append(`&lt;td onClick=&quot;toggleTaskMark(${i})&quot;&gt;&lt;i class=&quot;fas fa-check-circle&quot;&gt;&lt;/i&gt;&lt;/td&gt;`);
+    
+    i++;
+  }
+  
+  let toggleTaskMark = (id) =&gt; $(`#task_${id}`).toggleClass(&quot;done&quot;);
+  let deleteTask = (id) =&gt; $(`#task_${id}`).remove();</code></pre>
+          </div>
+
+          <div th:remove="all">
+            <button type="button" class="btn btn-dark headTag" id="load_date_2">2021/08/14 21:54:33</button>
+
+            <div class="btn-group snippetActions"role="group" aria-label="Snippet actions">
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+              <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+              <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+              <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+            </div>
+            <pre id="code_snippet_2"><code>body {
+    margin: 0;
+    background: slategrey;
+    font-family: &quot;Fira Sans Extra Condensed&quot;, sans-serif;
+    font-weight: 300;
+  }
+  
+  main {
+    width: 500px;
+    padding: 20px;
+    margin: 50px auto;
+    background: silver;
+    text-align: center;
+  }
+  
+  main h2 {
+    margin: 10px;
+    color: gray;
+    font-size: 72px; 
+    font-weight: 100;
+  }
+  
+  main input {
+    padding: 5px;
+    margin-bottom: 25px;
+  }
+  
+  main button {
+    padding: 5px 15px;
+  }
+  
+  main table {
+    width: 90%;
+    margin: 10px auto 50px; 
+  }
+  
+  main table td {
+    padding: 15px;
+    font-size: 20px;
+  }
+  
+  main table td:first-child {
+    box-sizing: border-box;
+    max-width: 400px;
+    text-align: left;
+    overflow-wrap: break-word;
+  }
+  
+  main table td:nth-child(n + 2) {
+    box-sizing: border-box;
+    width: 50px;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  main table .fas {
+    color: grey;
+  }
+  
+  main table tr.done td:first-child {
+    color: grey; 
+    font-style: italic;
+  }
+  
+  main table tr.done td:last-child &gt; i {
+    color: green; 
+  }
+  
+  </code></pre>
+          </div>
+          <div th:remove="all">
+            <button type="button" class="btn btn-dark headTag" id="load_date_3">2021/08/14 21:54:19</button>
+
+            <div class="btn-group snippetActions"role="group" aria-label="Snippet actions">
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+              <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+              <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+              <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+            </div>
+            <pre id="code_snippet_3"><code>&lt;main&gt;
+    &lt;h2&gt;TODOS&lt;/h2&gt;
+    &lt;input type=&quot;text&quot;&gt;&lt;button type=&quot;button&quot;&gt;Add&lt;/button&gt;    
+  
+    &lt;table&gt;
+    &lt;/table&gt;
+    
+  &lt;/main&gt;
+  </code></pre>
+          </div>
+          <div th:remove="all">
+            <button type="button" class="btn btn-dark headTag" id="load_date_4">2021/08/14 21:53:54</button>
+
+            <div class="btn-group snippetActions"role="group" aria-label="Snippet actions">
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+              <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+              <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+              <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+            </div>
+            <pre id="code_snippet_4"><code>&lt;!-- http://itutorial.thymeleaf.org/exercise/12 --&gt;
+  &lt;h1&gt;Thymeleaf tutorial - Answer for exercise 12: forms&lt;/h1&gt;
+  &lt;h2&gt;Customer edition&lt;/h2&gt;
+  
+  &lt;form method=&quot;post&quot; action=&quot;/exercise12/saveCustomer.html&quot; th:object=&quot;${customer}&quot;&gt;
+    &lt;input type=&quot;hidden&quot; th:field=&quot;*{id}&quot; /&gt;
+  
+    &lt;label for=&quot;firstName&quot;&gt;First name:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; th:field=&quot;*{firstName}&quot;/&gt;
+  
+    &lt;label for=&quot;lastName&quot;&gt;Last name:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; th:field=&quot;*{lastName}&quot; /&gt;
+  
+    Genre:
+    &lt;div class=&quot;radio&quot; th:each=&quot;gender : ${genders}&quot;&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;female&quot; th:id=&quot;&#39;gender_&#39; + ${genderStat.count}&quot; th:value=&quot;${gender}&quot; th:field=&quot;*{gender}&quot; /&gt;
+      &lt;label for=&quot;female&quot; th:for=&quot;&#39;gender_&#39; + ${genderStat.count}&quot; th:text=&quot;${gender.description.split(&#39; &#39;)[0]}&quot;&gt;Female&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;radio&quot; th:remove=&quot;all&quot;&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;male&quot; /&gt;
+      &lt;label for=&quot;male&quot;&gt;Male&lt;/label&gt;
+    &lt;/div&gt;
+  
+    &lt;label for=&quot;paymentMethod&quot;&gt;Payment method:&lt;/label&gt;
+  
+    &lt;select id=&quot;paymentMethod&quot; th:field=&quot;*{paymentMethod}&quot; th:remove=&quot;all-but-first&quot;&gt;
+      &lt;option th:each=&quot;method : ${paymentMethods}&quot; th:value=&quot;${method}&quot; th:text=&quot;${method.description.replace(&#39; payment&#39;, &#39;&#39;)}&quot;&gt;Credit card&lt;/option&gt;
+      &lt;option&gt;Direct debit&lt;/option&gt;
+      &lt;option&gt;Bank transfer&lt;/option&gt;
+    &lt;/select&gt;
+  
+    &lt;label for=&quot;balance&quot;&gt;Balance (dollars):&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;balance&quot; th:field=&quot;*{balance}&quot; /&gt;
+  
+    &lt;input type=&quot;submit&quot; /&gt;
+  &lt;/form&gt;</code></pre>
+          </div>
+          <div th:remove="all">
+            <button type="button" class="btn btn-dark headTag" id="load_date_5">2021/08/14 21:50:20</button>
+
+            <div class="btn-group snippetActions"role="group" aria-label="Snippet actions">
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+              <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+              <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+              <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+            </div>
+            <pre id="code_snippet_5"><code>.h1 {
+      font-family: &quot;Constantia&quot;, Times, serif;
+      font-size: calc(3vh + 12px);
+      margin: 2vh 3vw;
+  }
+  
+  p {
+      font-family: &quot;Verdana&quot;, sans-serif;
+      font-size: calc(1vh + 6px);
+      margin: 1vh 3vh;
+  }</code></pre>
+          </div>
+          <div th:remove="all">
+            <button type="button" class="btn btn-dark headTag" id="load_date_6">2021/08/14 21:44:53</button>
+
+            <div class="btn-group snippetActions"role="group" aria-label="Snippet actions">
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+              <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+              <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+              <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+            </div>
+            <pre id="code_snippet_6"><code>public static void main(String... args) {
+      System.out.println(&quot;hu-zza!&quot;);
+  }</code></pre>
+            </div>
+            <div>
+              <button type="button" class="btn btn-dark headTag" id="load_date_7">2021/08/14 21:43:26</button>
+  
+              <div class="btn-group snippetActions"role="group" aria-label="Snippet actions">
+                <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+                <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+                <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+                <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+                <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+                <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+              </div>
+              <pre id="code_snippet_7"><code>&lt;html&gt;
+      &lt;head&gt;
+          &lt;title&gt;The most impressive webpage&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+          &lt;h1&gt;The most impressive webpage&lt;/h1&gt;
+          &lt;p&gt;Dear Visitor,&lt;/p&gt; 
+  
+          &lt;p&gt;Suspendisse neque sem, commodo in lorem in, consectetur aliquet mauris. Proin vestibulum risus risus, laoreet sagittis magna consectetur pretium. Maecenas placerat maximus lectus vitae imperdiet. Nulla sit amet eleifend libero. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris rhoncus quam lacus, ut tincidunt elit ornare faucibus. Mauris fermentum in ipsum in pellentesque. Etiam sed placerat orci. Aenean et dui orci.&lt;/p&gt;
+  
+          &lt;p&gt;Donec dictum quam mi, quis venenatis metus blandit sagittis. Duis a consectetur nisl. Quisque vestibulum ipsum ac sapien aliquam condimentum. Aenean eget est feugiat, tincidunt urna nec, molestie nisl. Donec a dui lacus. Donec mi erat, iaculis et mi eget, ultrices dictum velit. Ut vitae maximus tellus. Vivamus congue aliquam magna, ut molestie leo porta molestie. Aliquam ac pharetra mi.&lt;/p&gt;
+  
+          &lt;p&gt;Phasellus eu condimentum libero, ut porttitor enim. Suspendisse efficitur lacus vitae est fringilla mollis. Aenean ac metus orci. Ut ac pellentesque leo. Nullam vulputate purus at nisl placerat, aliquet ultricies ex cursus. Etiam rutrum porttitor dolor, at rutrum arcu pulvinar sit amet. Duis egestas mi neque, sodales interdum diam eleifend id. Vivamus accumsan fringilla feugiat. Nam metus est, blandit rhoncus metus vitae, semper pellentesque tortor.&lt;/p&gt;
+  
+          &lt;p&gt;Praesent posuere sodales leo, eu venenatis turpis laoreet aliquam. Proin et nisl ex. Integer tempor lorem felis, et mollis urna convallis nec. Morbi dapibus, risus ac rhoncus facilisis, velit nisi vestibulum dui, et egestas ligula libero sit amet velit. Proin tincidunt augue lorem, at rutrum nibh lobortis sit amet. Sed rhoncus, elit et vestibulum mollis, magna nunc malesuada nunc, sed dignissim orci odio dignissim velit. Fusce pharetra tellus volutpat est tempor suscipit. Praesent lacinia augue a faucibus tempor. Donec ac felis est. Proin non sagittis massa. Sed fringilla leo libero, ut rhoncus ante lacinia id. Pellentesque nec facilisis lorem. Sed lacinia commodo metus eu aliquam.&lt;/p&gt;
+  
+          &lt;p&gt;Proin venenatis dapibus enim, vel tincidunt mauris vehicula vel. Nullam dapibus velit ut orci tempor, posuere dictum leo molestie. Aliquam nec urna urna. Fusce a pulvinar lacus, id mattis dui. Suspendisse ullamcorper congue efficitur. Curabitur consectetur vulputate tellus. Vestibulum leo dui, semper eget sapien non, vehicula posuere tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut fermentum luctus lacus nec imperdiet. Maecenas tincidunt auctor nunc at rhoncus. Duis lectus turpis, gravida et ante ut, elementum ornare nisi. Etiam congue dictum metus, in vehicula massa bibendum ac. Pellentesque id sollicitudin nulla, ut tempus diam. Donec imperdiet metus vitae dictum dapibus.&lt;/p&gt;
+      &lt;/body&gt;
+  &lt;/html&gt;</code></pre>
+          </div>
+          <div th:remove="all">
+            <button type="button" class="btn btn-dark headTag" id="load_date_8">2021/08/14 21:35:30</button>
+
+            <div class="btn-group snippetActions"role="group" aria-label="Snippet actions">
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-link-45deg"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-clipboard"></i></button>
+              <button type="button" class="btn btn-outline-primary"><i class="bi bi-chat-text"></i></button>
+              <button type="button" class="btn btn-outline-success"><i class="bi bi-caret-up-fill"></i></button>
+              <button type="button" class="btn btn-outline-danger"><i class="bi bi-caret-down-fill"></i></button>
+              <button type="button" class="btn btn-outline-warning"><i class="bi bi-bug-fill"></i></button>
+            </div>
+            <pre id="code_snippet_8"><code>ThisIsAVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongLine
+  ThisIsAVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongLine
+  ThisIsAVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongLine</code></pre>
           </div>
         </div>
 
-        <div class="col-2"></div>
+        <div class="col-1"></div>
       </div>
     </div>
 
