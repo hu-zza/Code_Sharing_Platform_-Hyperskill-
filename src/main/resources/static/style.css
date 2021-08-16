@@ -7,71 +7,22 @@ div.snippets > div {
   margin: 10px 0 50px;
 }
 
-
-/*
-div.snippets button.headTag {
-  border-radius: 0.5em 0.5em 0 0;
+div.snippetHeader {
+  display: flex;
+  justify-content: space-between;
 }
 
 
-div.snippetAction {
-  position: absolute;
-  top: 0;
-  right: 0;
+div.snippetAction ul.dropdown-menu li {
+  min-width: 3.4rem;
+  font-size: 1.75rem;
 }
 
-div.btn-group {
-  display: none;
-}
-
-
-@media screen and (min-width: 576px) {
-  div.dropdown {
-    display: none;
-  }
-
-  div.btn-group {
-    display: inline-flex;
-  }
-}
-
-
-div.dropdown button.dropdown-toggle {
-  min-width: 60px;
-  border-radius: 0.5em 0.5em 0 0;
-}
-
-div.dropdown ul.dropdown-menu {
-  min-width: 60px;
-}
-
-div.dropdown button.dropdown-toggle::after {
-  display: none;
-}
-
-
-div.snippets div.btn-group button {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-color: #221a0f;
-}
-*/
-
-
-
-div.snippetAction {
-  position: absolute;
-  right: 20px;
-}
-
-
-/*
-  The necessary part
-*/
 @media screen and (min-width: 576px) {
   /* A disposable rule */
   div.snippetAction {
-    right: 380px;
+    position: absolute;
+    right: 20.5rem;
   }
 
   div.snippetAction button.dropdown-toggle {
@@ -80,30 +31,23 @@ div.snippetAction {
 
   div.snippetAction ul.dropdown-menu {
     display: flex;
+    padding: 0;
+  }
+
+  div.snippetAction ul.dropdown-menu li {
+    font-size: 1.2rem;
   }
 }
 
 div.snippetAction button.dropdown-toggle {
-  min-width: 60px;
+  min-width: 3.75rem;
 }
 
 div.snippetAction ul.dropdown-menu {
-  min-width: 60px;
-}
-
-div.snippetAction ul.dropdown-menu li {
-  min-width: 60px;
+  min-width: 3.75rem;
 }
 
 div.snippetAction button.dropdown-toggle::after {
   display: none;
 }
 
-
-div.snippetInfo ul.dropdown-menu {
-  min-width: 300px;
-}
-
-div.snippetInfo button.dropdown-toggle::after {
-  display: none;
-}
