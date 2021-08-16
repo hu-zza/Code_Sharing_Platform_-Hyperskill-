@@ -8,12 +8,13 @@ div.snippets > div {
 }
 
 
+/*
 div.snippets button.headTag {
   border-radius: 0.5em 0.5em 0 0;
 }
 
 
-div.snippetActions {
+div.snippetAction {
   position: absolute;
   top: 0;
   right: 0;
@@ -53,4 +54,56 @@ div.snippets div.btn-group button {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-color: #221a0f;
+}
+*/
+
+
+
+div.snippetAction {
+  position: absolute;
+  right: 20px;
+}
+
+
+/*
+  The necessary part
+*/
+@media screen and (min-width: 576px) {
+  /* A disposable rule */
+  div.snippetAction {
+    right: 380px;
+  }
+
+  div.snippetAction button.dropdown-toggle {
+    display: none;
+  }
+
+  div.snippetAction ul.dropdown-menu {
+    display: flex;
+  }
+}
+
+div.snippetAction button.dropdown-toggle {
+  min-width: 60px;
+}
+
+div.snippetAction ul.dropdown-menu {
+  min-width: 60px;
+}
+
+div.snippetAction ul.dropdown-menu li {
+  min-width: 60px;
+}
+
+div.snippetAction button.dropdown-toggle::after {
+  display: none;
+}
+
+
+div.snippetInfo ul.dropdown-menu {
+  min-width: 300px;
+}
+
+div.snippetInfo button.dropdown-toggle::after {
+  display: none;
 }

@@ -7,83 +7,130 @@
   <title>Snippet Actions</title>
 </head>
 <body>
-  <div class="snippetActions" th:fragment="snippetActionButtons">
-
-    <div class="dropdown">
-      <button type="button" class="btn btn-outline-dark dropdown-toggle" id="dropdownButton"  data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-three-dots"></i>
-      </button>
-
-      <ul class="dropdown-menu" aria-labelledby="dropdownButton">
-
-        <li>
-          <button type="button" class="dropdown-item text-primary fs-3">
-            <i class="bi bi-link-45deg"></i>
-          </button>            
-        </li>
-
-        <li>
-          <button type="button" class="dropdown-item text-primary fs-3">
-            <i class="bi bi-clipboard"></i>
-          </button>            
-        </li>
-
-        <li>
-          <button type="button" class="dropdown-item text-primary fs-3">
-            <i class="bi bi-chat-text"></i>
-          </button>            
-        </li>
-
-        <li>
-          <button type="button" class="dropdown-item text-success fs-3">
-            <i class="bi bi-caret-up-fill"></i>
-          </button>            
-        </li>
-
-        <li>
-          <button type="button" class="dropdown-item text-danger fs-3">
-            <i class="bi bi-caret-down-fill"></i>
-          </button>            
-        </li>
-
-        <li>
-          <button type="button" class="dropdown-item text-warning fs-3">
-            <i class="bi bi-bug-fill"></i>
-          </button>            
-        </li>
-
-      </ul>
-    </div> 
 
 
-    <div class="btn-group" role="group" aria-label="Snippet actions">
+  <div class="snippetInfo" th:fragment="snippetInfoButton">
+    <button type="button" class="btn btn-outline-dark dropdown-toggle" id="infoDropdownButton"  data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet info">
+      <i class="bi bi-info-lg"></i>
+    </button>
 
-      <button type="button" class="btn btn-outline-primary">
-        <i class="bi bi-link-45deg"></i>
-      </button>
+    <ul class="dropdown-menu" aria-labelledby="infoDropdownButton">
+      <li>
+        <h6 class="dropdown-header">
+          Author
+        </h6>
+      </li>
 
-      <button type="button" class="btn btn-outline-primary">
-        <i class="bi bi-clipboard"></i>
-      </button>
+      <li>
+        <button type="button" class="dropdown-item text-primary" title="Author: Szabó László András">
+          <i class="bi bi-person-fill"></i> Szabó László András
+        </button>
+      </li>
 
-      <button type="button" class="btn btn-outline-primary">
-        <i class="bi bi-chat-text"></i>
-      </button>
+      <li>
+        <a href="https://zza.hu" target="_blank" class="dropdown-item text-primary" title="Personal site">
+          <i class="bi bi-layout-text-sidebar-reverse"></i> Personal site: zza.hu
+        </a>
+      </li>
 
-      <button type="button" class="btn btn-outline-success">
-        <i class="bi bi-caret-up-fill"></i>
-      </button>
+      <li>
+        <a href="https://zza.hu/GitHub" target="_blank" class="dropdown-item text-primary" title="GitHub profile">
+          <i class="bi bi-github"></i> Projects on GitHub
+        </a>
+      </li>
 
-      <button type="button" class="btn btn-outline-danger">
-        <i class="bi bi-caret-down-fill"></i>
-      </button>
+      <li>
+        <a href="https://zza.hu/LinkedIn" target="_blank" class="dropdown-item text-primary" title="LinkedIn profile">
+          <i class="bi bi-linkedin"></i> LinkedIn profile
+        </a>
+      </li>
 
-      <button type="button" class="btn btn-outline-warning">
-        <i class="bi bi-bug-fill"></i>
-      </button>
 
-    </div>           
+      <li>
+        <hr class="dropdown-divider">
+        <h6 class="dropdown-header">
+          Statistics
+        </h6>
+      </li>
 
+      <li>
+        <button type="button" class="dropdown-item text-secondary font-monospace" title="Views: 237">
+          <i class="bi bi-eye-fill"></i> 237
+        </button>
+      </li>
+
+      <li>
+        <button type="button" class="dropdown-item text-secondary font-monospace" title="Posted: 2020/02/02 20:20:20">
+          <i class="bi bi-calendar3"></i> 2020/02/02 20:20:20
+        </button>
+      </li>
+
+
+      <li>
+        <hr class="dropdown-divider">
+        <h6 class="dropdown-header">
+          Limits
+        </h6>
+      </li>
+
+      <li>
+        <button type="button" class="dropdown-item text-danger font-monospace" title="View limit: 300">
+          <i class="bi bi-eye-slash-fill"></i> 300
+        </button>
+      </li>
+
+      <li>
+        <button type="button" class="dropdown-item text-danger font-monospace" title="Expiry: 2020/02/02 22:22:22">
+          <i class="bi bi-calendar-x"></i> 2020/02/02 22:22:22
+        </button>
+      </li>
+    </ul>
   </div>
+
+
+  <div class="snippetAction" th:fragment="snippetActionButtons">
+    <button type="button" class="btn btn-outline-dark dropdown-toggle" id="actionDropdownButton"  data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet actions">
+      <i class="bi bi-three-dots"></i>
+    </button>
+
+    <ul class="dropdown-menu" aria-labelledby="actionDropdownButton">
+      <li>
+        <button type="button" class="dropdown-item text-primary fs-3" title="Copy link">
+          <i class="bi bi-link-45deg"></i>
+        </button>
+      </li>
+
+      <li>
+        <button type="button" class="dropdown-item text-primary fs-3" title="Copy to clipboard">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </li>
+
+      <li>
+        <button type="button" class="dropdown-item text-primary fs-3" title="Show comments">
+          <i class="bi bi-chat-text"></i>
+        </button>
+      </li>
+
+      <li>
+        <button type="button" class="dropdown-item text-success fs-3" title="Upvote">
+          <i class="bi bi-caret-up-fill"></i>
+        </button>
+      </li>
+
+      <li>
+        <button type="button" class="dropdown-item text-danger fs-3" title="Downvote">
+          <i class="bi bi-caret-down-fill"></i>
+        </button>
+      </li>
+
+      <li>
+        <button type="button" class="dropdown-item text-warning fs-3" title="Report a bug">
+          <i class="bi bi-bug-fill"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+
 </body>
 </html>

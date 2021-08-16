@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{'/highlight-styles/kimbie-dark.min.css'}" href="../static/highlight-styles/kimbie-dark.min.css">
     
     <script th:src="@{'/highlight.min.js'}" src="../static/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.highlightAll();</script>
   </head>
   <body>
       <p th:if="${snippet.date}">
@@ -28,5 +28,6 @@
       </p>
       
       <script th:src="@{'/bootstrap.bundle.min.js'}" src="../static/bootstrap.bundle.min.js"></script>
-    </body>
+      <script th:src="@{'/scripts.js'}" src="../static/scripts.js"></script>
+  </body>
 </html>
