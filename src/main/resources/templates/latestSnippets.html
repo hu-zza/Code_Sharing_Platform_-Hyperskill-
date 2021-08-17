@@ -19,7 +19,7 @@
         <div class="col-1"></div>
 
         <div class="col-10 snippets">
-          <div th:each="snippet : ${latestTenSnippets}">
+          <div class="snippet" th:each="snippet : ${latestTenSnippets}">
 
             <div class="snippetHeader">
               <div class="snippetInfo" th:replace="thymeleafTemplates :: snippetInfoButton">
@@ -150,8 +150,6 @@
   System.out.println(&quot;hu-zza!&quot;);
 }</code></pre>
           </div>
-
-
 
         </div>
 

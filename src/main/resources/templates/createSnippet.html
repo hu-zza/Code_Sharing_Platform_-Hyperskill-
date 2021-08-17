@@ -11,23 +11,41 @@
     <link rel="stylesheet" th:href="@{'/highlight-styles/kimbie-dark.min.css'}" href="../static/highlight-styles/kimbie-dark.min.css">
     
     <script th:src="@{'/highlight.min.js'}" src="../static/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.highlightAll();</script>
   </head>
   <body>
-    <form action="" th:action="@{/code/new}" method="post" th:object="${newSnippet}">
-      <label for="code">Code:</label>
-      <br>
-      <textarea id="code" th:field="*{code}"></textarea>
-      <br><br>
-      <label for="time">Time limit:</label>
-      <input id="time" th:field="*{time}" type="number">
-      <br>
-      <label for="views">View limit:</label>
-      <input id="views" th:field="*{views}" type="number">
-      <br><br>
-      <input type="submit" value="Submit">
-    </form>
-    
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-1"></div>
+
+        <div class="col-10">
+
+          <form action="" th:action="@{/code/new}" method="post" th:object="${newSnippet}">
+            <h1 class="h3 mb-3 fw-normal">Share code snippet</h1>
+        
+            <div class="form-floating">
+              <textarea id="code" th:field="*{code}" class="form-control" rows="10" placeholder="Your code snippet"></textarea>
+              <label for="code">Code</label>
+            </div>
+
+            <div class="form-floating">
+              <input id="time" th:field="*{time}" class="form-control" type="number" placeholder="Time limit">
+              <label for="time">Time limit</label>
+            </div>
+        
+            <div class="form-floating">
+              <input id="views" th:field="*{views}" class="form-control" type="number" placeholder="View limit">
+              <label for="time">View limit</label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Share</button>
+          </form>
+
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+
     <script th:src="@{'/bootstrap.bundle.min.js'}" src="../static/bootstrap.bundle.min.js"></script>
   </body>
 </html>

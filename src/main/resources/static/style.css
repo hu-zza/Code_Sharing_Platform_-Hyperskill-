@@ -1,5 +1,17 @@
 body {
+  --bs-text-primary: #448fff;
+  --bs-primary-rgb: 68, 143, 255;
+  --bs-text-ligth: silver;
+  --bs-light-rgb: 192, 192, 192;
   --bs-body-bg: #333;
+}
+
+div.important {
+  background-color: var(--bs-purple);
+}
+
+textarea#code {
+  min-height: 30vh;
 }
 
 div.snippets > div {
@@ -22,7 +34,7 @@ div.snippetAction ul.dropdown-menu li {
   /* A disposable rule */
   div.snippetAction {
     position: absolute;
-    right: 20.5rem;
+    right: 21rem;
   }
 
   div.snippetAction button.dropdown-toggle {
@@ -31,7 +43,7 @@ div.snippetAction ul.dropdown-menu li {
 
   div.snippetAction ul.dropdown-menu {
     display: flex;
-    padding: 0;
+    padding: 0 0.25rem;
   }
 
   div.snippetAction ul.dropdown-menu li {

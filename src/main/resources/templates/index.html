@@ -1,39 +1,53 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <title>Code Sharing Platform</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <title>Code Sharing Platform</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" th:href="@{'/style.css'}" href="../static/style.css">
-  <link rel="stylesheet" th:href="@{'/bootstrap.min.css'}" href="../static/bootstrap.min.css">
-  <link rel="stylesheet" th:href="@{'/icons/bootstrap-icons.css'}" href="../static/icons/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{'/style.css'}" href="../static/style.css">
+    <link rel="stylesheet" th:href="@{'/bootstrap.min.css'}" href="../static/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{'/icons/bootstrap-icons.css'}" href="../static/icons/bootstrap-icons.css">
+  </head>
+  <body>
+      
+    <main>
+      <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center text-primary text-decoration-none">
+            <span class="fs-4">Code Sharing Platform</span>
+          </a>
+        </header>
 
-</head>
-<body>
-  <h1>Welcome to the Code Sharing Platform</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean venenatis magna vel leo tempus vehicula.
-    In condimentum cursus diam, mollis interdum sem posuere nec. Proin tristique dolor nec massa hendrerit lacinia.
-    Vestibulum dictum consequat urna vel dictum. Morbi tortor ligula, placerat eu fermentum ullamcorper, egestas
-    quis lectus. Cras gravida posuere tristique. Nunc luctus, nibh et interdum pretium, orci ipsum dapibus ipsum,
-    eu ultrices eros ipsum id quam. Praesent interdum tempor purus eu rutrum.</p>
+        <div class="p-5 mb-4 text-light bg-dark rounded-3">
+          <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold text-white">Share your snippet</h1>
+            <p class="col-md-8 fs-4">The <em>Code Sharing Platform</em> gives you a quick and convenient way to share, review and vote code snippets. While the UI is clean and mobile-friendly, the core is robust and secure.</p>
+            <a th:href="@{'/new'}" href="./createSnippet.html" class="btn btn-primary btn-lg" type="button" title="Create a snippet">Create a snippet</a>
+          </div>
+        </div>
 
-  <p>Vivamus id blandit purus, sed bibendum nunc. Sed aliquam metus a lacus lacinia, ut cursus tortor dictum.
-    Aliquam tincidunt felis vitae malesuada ultrices. Aenean ultricies, nulla quis dapibus aliquam, lorem urna
-    ultricies augue, vitae hendrerit magna massa a neque. Orci varius natoque penatibus et magnis dis parturient
-    montes, nascetur ridiculus mus. Mauris pellentesque justo a enim semper, a faucibus enim pretium. Nullam
-    tincidunt aliquet lacinia. Etiam id facilisis mi. Cras hendrerit eu lacus sit amet egestas. Sed porta viverra
-    nibh vitae suscipit. Ut sed fringilla turpis. Praesent quis purus dui. Quisque vitae orci sed diam ultricies
-    euismod. In hac habitasse platea dictumst.</p>
+        <div class="row align-items-md-stretch">
+          <div class="col-md-6">
+            <div class="h-100 p-5 text-light bg-dark rounded-3">
+              <h2>Latest snippets</h2>
+              <p>Are you interested in the most recent code snippets? All you need is the smell of the oven-fresh scripts? Then give a look to the <em>Latest snippets</em> section.</p>
+              <a th:href="@{'/latest'}" href="./latestSnippets.html" class="btn btn-outline-light" type="button" title="Go to Latest snippets">Latest snippets</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="h-100 p-5 text-white rounded-3 important">
+              <h2>Trending & Insights</h2>
+              <p>Want to see the bigger picture? In the Trending & Insights you'll find everything you need to look back over the last few weeks, months or even years.</p>
+              <a th:href="@{'/trending'}" href="./trendingAndInsights.html" class="btn btn-outline-light" type="button" title="Go to Trending & Insights">Trending & Insights</a>
+            </div>
+          </div>
+        </div>
 
-  <p>Vivamus ultricies tortor tellus, ac tincidunt augue consectetur eget. Aenean efficitur maximus hendrerit.
-    Praesent placerat a purus nec consequat. Aenean id odio sit amet est egestas varius ut vel arcu. Duis ut lacus
-    cursus urna interdum feugiat. Sed sit amet lacus vehicula, laoreet libero at, suscipit mi. Suspendisse quis
-    malesuada sapien. Ut ultrices arcu eu urna imperdiet, in condimentum diam sodales. Nunc et turpis eleifend,
-    dapibus erat et, pretium elit. Vivamus mollis, nisl a ultrices ultrices, ex leo suscipit massa, et suscipit
-    felis mauris in dui. Nulla ornare blandit nulla vel sollicitudin. Aliquam sit amet laoreet velit. Curabitur
-    diam lacus, euismod id maximus at, commodo id dui. Nulla in posuere ante, sed euismod felis.</p>
-
-  <script th:src="@{'/bootstrap.bundle.min.js'}" src="../static/bootstrap.bundle.min.js"></script>
-</body>
+        <footer class="pt-3 mt-4 text-muted border-top">
+          &copy; 2021
+        </footer>
+      </div>
+    </main>
+  </body>
 </html>

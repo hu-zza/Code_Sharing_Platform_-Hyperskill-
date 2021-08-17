@@ -69,4 +69,9 @@ public class ViewController {
     model.put("latestTenSnippets", latestTenSnippets);
     return "latestSnippets";
   }
+
+  @GetMapping("/trending")
+  private String getStatisticsPage(Map<String, Object> model) {
+    return "trendingAndInsights";
+  }
 }
