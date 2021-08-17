@@ -23,7 +23,7 @@
           <div class="container-fluid py-5">
             <h1 class="display-5 fw-bold text-white">Share your snippet</h1>
             <p class="col-md-8 fs-4">The <em>Code Sharing Platform</em> gives you a quick and convenient way to share, review and vote code snippets. While the UI is clean and mobile-friendly, the core is robust and secure.</p>
-            <a th:href="@{'/new'}" href="./createSnippet.html" class="btn btn-primary btn-lg" type="button" title="Create a snippet">Create a snippet</a>
+            <a th:href="@{'/code/new'}" href="./createSnippet.html" class="btn btn-primary btn-lg" type="button" title="Create a snippet">Create a snippet</a>
           </div>
         </div>
 
@@ -32,14 +32,14 @@
             <div class="h-100 p-5 text-light bg-dark rounded-3">
               <h2>Latest snippets</h2>
               <p>Are you interested in the most recent code snippets? All you need is the smell of the oven-fresh scripts? Then give a look to the <em>Latest snippets</em> section.</p>
-              <a th:href="@{'/latest'}" href="./latestSnippets.html" class="btn btn-outline-light" type="button" title="Go to Latest snippets">Latest snippets</a>
+              <a th:href="@{'/code/latest'}" href="./latestSnippets.html" class="btn btn-outline-light" type="button" title="Go to Latest snippets">Latest snippets</a>
             </div>
           </div>
           <div class="col-md-6">
             <div class="h-100 p-5 text-white rounded-3 important">
               <h2>Trending & Insights</h2>
               <p>Want to see the bigger picture? In the Trending & Insights you'll find everything you need to look back over the last few weeks, months or even years.</p>
-              <a th:href="@{'/trending'}" href="./trendingAndInsights.html" class="btn btn-outline-light" type="button" title="Go to Trending & Insights">Trending & Insights</a>
+              <a th:href="@{'/code/trending'}" href="./trendingAndInsights.html" class="btn btn-outline-light" type="button" title="Go to Trending & Insights">Trending & Insights</a>
             </div>
           </div>
         </div>

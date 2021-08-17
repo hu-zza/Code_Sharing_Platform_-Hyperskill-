@@ -19,10 +19,10 @@
         <div class="col-1"></div>
 
         <div class="col-10 snippets">
-          <div class="snippet" th:each="snippet : ${latestTenSnippets}">
+          <div class="snippet" th:id="'snippet_' + ${snippetStat.index}" th:each="snippet : ${latestTenSnippets}">
 
             <div class="snippetHeader">
-              <div class="snippetInfo" th:replace="thymeleafTemplates :: snippetInfoButton">
+              <div class="snippetInfo" th:replace="thymeleafTemplates :: snippetInfoButton (${snippet}, ${snippetStat.index})">
                 <button type="button" class="btn btn-dark dropdown-toggle" id="infoDropdownButton"  data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet info">
                   <i class="bi bi-info-lg"></i>
                 </button>
@@ -101,7 +101,7 @@
               </div>
 
 
-              <div class="snippetAction" th:replace="thymeleafTemplates :: snippetActionButtons">
+              <div class="snippetAction" th:replace="thymeleafTemplates :: snippetActionButtons (${snippet}, ${snippetStat.index})">
                 <button type="button" class="btn btn-dark dropdown-toggle" id="actionDropdownButton"  data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet actions">
                   <i class="bi bi-three-dots"></i>
                 </button>
@@ -146,7 +146,7 @@
               </div>
             </div>
 
-            <pre th:id="'code_snippet_' + ${snippetStat.count}"><code th:text="${snippet.code}">public static void main(String... args) {
+            <pre th:id="'code_snippet_' + ${snippetStat.index}"><code th:text="${snippet.code}">public static void main(String... args) {
   System.out.println(&quot;hu-zza!&quot;);
 }</code></pre>
           </div>

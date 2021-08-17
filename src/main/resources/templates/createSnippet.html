@@ -20,22 +20,27 @@
 
         <div class="col-10">
 
-          <form action="" th:action="@{/code/new}" method="post" th:object="${newSnippet}">
-            <h1 class="h3 mb-3 fw-normal">Share code snippet</h1>
+          <form id="newSnippet" action="" th:action="@{'/code/new'}" method="post" th:object="${newSnippet}">
+            <h1 class="h3 mb-3 text-light fw-normal">Share code snippet</h1>
         
             <div class="form-floating">
-              <textarea id="code" th:field="*{code}" class="form-control" rows="10" placeholder="Your code snippet"></textarea>
-              <label for="code">Code</label>
+              <textarea id="code" th:field="*{code}" class="form-control" placeholder="Your code snippet"></textarea>
+              <label for="code" class="form-label">Code</label>
             </div>
 
-            <div class="form-floating">
-              <input id="time" th:field="*{time}" class="form-control" type="number" placeholder="Time limit">
-              <label for="time">Time limit</label>
-            </div>
-        
-            <div class="form-floating">
-              <input id="views" th:field="*{views}" class="form-control" type="number" placeholder="View limit">
-              <label for="time">View limit</label>
+            <div class="row mb-5 mt-3">
+              <div class="col">
+                <div class="form-floating">
+                  <input id="time" th:field="*{time}" class="form-control" type="number" placeholder="Time limit (minutes)">
+                  <label for="time" class="form-label">Time limit (minutes)</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-floating">
+                  <input id="views" th:field="*{views}" class="form-control" type="number" placeholder="View limit">
+                  <label for="time" class="form-label">View limit</label>
+                </div>
+              </div>
             </div>
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Share</button>

@@ -1,13 +1,17 @@
 body {
   --bs-text-primary: #448fff;
   --bs-primary-rgb: 68, 143, 255;
-  --bs-text-ligth: silver;
+  --bs-text-light: silver;
   --bs-light-rgb: 192, 192, 192;
   --bs-body-bg: #333;
 }
 
 div.important {
   background-color: var(--bs-purple);
+}
+
+form#newSnippet {
+  margin-top: 5vh;
 }
 
 textarea#code {
@@ -31,7 +35,6 @@ div.snippetAction ul.dropdown-menu li {
 }
 
 @media screen and (min-width: 576px) {
-  /* A disposable rule */
   div.snippetAction {
     position: absolute;
     right: 21rem;

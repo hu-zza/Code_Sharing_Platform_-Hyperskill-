@@ -9,12 +9,12 @@
 <body>
 
 
-  <div class="snippetInfo" th:fragment="snippetInfoButton">
-    <button type="button" class="btn btn-dark dropdown-toggle" id="infoDropdownButton"  data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet info">
+  <div class="snippetInfo" th:fragment="snippetInfoButton (snippet, nrOnPage)">
+    <button type="button" class="btn btn-dark dropdown-toggle" th:id="'infoDropdownButton_' + ${nrOnPage}" id="infoDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet info">
       <i class="bi bi-info-lg"></i>
     </button>
 
-    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="infoDropdownButton">
+    <ul class="dropdown-menu dropdown-menu-dark" th:aria-labelledby="'infoDropdownButton_' + ${nrOnPage}" aria-labelledby="infoDropdownButton">
       <li>
         <h6 class="dropdown-header">
           Author
@@ -23,7 +23,7 @@
 
       <li>
         <button type="button" class="dropdown-item text-primary" title="Author: Szabó László András">
-          <i class="bi bi-person-fill"></i> Szabó László András
+          <i class="bi bi-person-fill"></i> <span>Szabó László András</span>
         </button>
       </li>
 
@@ -60,26 +60,26 @@
       </li>
 
       <li>
-        <button type="button" class="dropdown-item text-secondary font-monospace" title="Posted: 2020/02/02 20:20:20">
-          <i class="bi bi-calendar3"></i> 2020/02/02 20:20:20
+        <button type="button" class="dropdown-item text-secondary font-monospace" th:title="'Posted: ' + ${snippet.date}" title="Posted: 2020/02/02 20:20:20">
+          <i class="bi bi-calendar3"></i> <span th:text="${snippet.date}">2020/02/02 20:20:20</span>
         </button>
       </li>
 
 
-      <li>
+      <li th:if="${snippet.isRestrictedByViews() or snippet.isRestrictedByTime()}">
         <hr class="dropdown-divider">
         <h6 class="dropdown-header">
           Limits
         </h6>
       </li>
 
-      <li>
+      <li th:if="${snippet.isRestrictedByViews()}">
         <button type="button" class="dropdown-item text-danger font-monospace" title="View limit: 300">
           <i class="bi bi-eye-slash-fill"></i> 300
         </button>
       </li>
 
-      <li>
+      <li th:if="${snippet.isRestrictedByTime()}">
         <button type="button" class="dropdown-item text-danger font-monospace" title="Expiry: 2020/02/02 22:22:22">
           <i class="bi bi-calendar-x"></i> 2020/02/02 22:22:22
         </button>
@@ -88,12 +88,12 @@
   </div>
 
 
-  <div class="snippetAction" th:fragment="snippetActionButtons">
-    <button type="button" class="btn btn-dark dropdown-toggle" id="actionDropdownButton"  data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet actions">
+  <div class="snippetAction" th:fragment="snippetActionButtons (snippet, nrOnPage)">
+    <button type="button" class="btn btn-dark dropdown-toggle" th:id="'actionDropdownButton_' + ${nrOnPage}" id="actionDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet actions">
       <i class="bi bi-three-dots"></i>
     </button>
 
-    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="actionDropdownButton">
+    <ul class="dropdown-menu dropdown-menu-dark" th:aria-labelledby="'actionDropdownButton_' + ${nrOnPage}" aria-labelledby="actionDropdownButton">
       <li>
         <button type="button" class="dropdown-item text-primary" title="Copy link">
           <i class="bi bi-link-45deg"></i>
