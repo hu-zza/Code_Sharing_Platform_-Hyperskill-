@@ -11,9 +11,9 @@ public interface CodeSnippetRepository extends CrudRepository<CodeSnippet, Long>
   Optional<CodeSnippet> findByUuid(String uuid);
 
   default List<CodeSnippet> findLatest10() {
-    return findTop10ByTimeLessThanEqualAndViewsLessThanEqualOrderByIdDesc(0L, 0L);
+    return findTop10ByTimeLimitLessThanEqualAndViewLimitLessThanEqualOrderByIdDesc(0L, 0L);
   }
 
-  List<CodeSnippet> findTop10ByTimeLessThanEqualAndViewsLessThanEqualOrderByIdDesc(
+  List<CodeSnippet> findTop10ByTimeLimitLessThanEqualAndViewLimitLessThanEqualOrderByIdDesc(
       Long time, Long views);
 }

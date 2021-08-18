@@ -1,5 +1,78 @@
 package hu.zza.hyperskill.snippets;
 
-public class Author {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+@JsonIgnoreProperties({"id"})
+public class Author {
+  @Id @GeneratedValue private long id = 0L;
+
+  private final String uuid = UUID.randomUUID().toString();
+  private String name = "Unknown";
+  private String personal = "";
+  private String github = "";
+  private String linkedin = "";
+
+  public long getId() {
+    return id;
+  }
+
+  public String getUuid() {
+    return uuid;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getPersonal() {
+    return personal;
+  }
+
+  public void setPersonal(String personal) {
+    this.personal = personal;
+  }
+
+  public String getGithub() {
+    return github;
+  }
+
+  public void setGithub(String github) {
+    this.github = github;
+  }
+
+  public String getLinkedin() {
+    return linkedin;
+  }
+
+  public void setLinkedin(String linkedin) {
+    this.linkedin = linkedin;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    Author author = (Author) o;
+
+    return uuid.equals(author.uuid);
+  }
+
+  @Override
+  public int hashCode() {
+    return uuid.hashCode();
+  }
 }

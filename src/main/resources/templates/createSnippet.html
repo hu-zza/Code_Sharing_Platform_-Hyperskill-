@@ -31,13 +31,19 @@
             <div class="row mb-5 mt-3">
               <div class="col">
                 <div class="form-floating">
-                  <input id="time" th:field="*{time}" class="form-control" type="number" placeholder="Time limit (minutes)">
+                  <input id="author" th:field="*{author}" class="form-control" type="text" placeholder="Author">
+                  <label for="author" class="form-label">Author</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-floating">
+                  <input id="time" th:field="*{timeLimit}" class="form-control" type="number" placeholder="Time limit (minutes)">
                   <label for="time" class="form-label">Time limit (minutes)</label>
                 </div>
               </div>
               <div class="col">
                 <div class="form-floating">
-                  <input id="views" th:field="*{views}" class="form-control" type="number" placeholder="View limit">
+                  <input id="views" th:field="*{viewLimit}" class="form-control" type="number" placeholder="View limit">
                   <label for="time" class="form-label">View limit</label>
                 </div>
               </div>

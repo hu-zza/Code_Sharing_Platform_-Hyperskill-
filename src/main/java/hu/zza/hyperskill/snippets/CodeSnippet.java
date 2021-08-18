@@ -11,69 +11,35 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@JsonIgnoreProperties({"id", "uuid", "viewCount"})
+@JsonIgnoreProperties({"id", "timeLimit"})
 public class CodeSnippet {
 
   private static final DateTimeFormatter FORMATTER =
       DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
 
-  // Not for JSON...
   @Id @GeneratedValue private long id = 0L;
-  private String uuid = UUID.randomUUID().toString();
-  private long viewCount = 0L;
 
-  // JSON attributes
+  private final String uuid = UUID.randomUUID().toString();
+
+  @ManyToOne
+  @JoinColumn(name = "author_uuid")
+  private Author author = null;
+
   @Column(columnDefinition = "text")
   private String code = "";
-  private LocalDateTime date = LocalDateTime.now();
 
-  // JSON attributes, but getters provide the value
-  private long time = 0L;
-  private long views = 0L;
+  private final LocalDateTime date = LocalDateTime.now();
 
-  @JsonGetter("time")
-  public long getTime() {
-    if (time == 0) {
-      return 0;
-    }
-    long elapsedSeconds = Duration.between(date, LocalDateTime.now()).getSeconds();
-    return time > elapsedSeconds ? time - elapsedSeconds : 0;
-  }
+  private long timeLimit = 0L;
+  private LocalDateTime expiryDate = LocalDateTime.MIN;
 
-  public void setTime(long time) {
-    this.time = time;
-  }
+  private long viewCount = 0L;
+  private long viewLimit = 0L;
 
-  @JsonGetter("views")
-  public long getViews() {
-    if (views == 0) {
-      return 0;
-    }
-    return views > viewCount ? views - viewCount : 0;
-  }
-
-  public void setViews(long views) {
-    this.views = views;
-  }
-
-  @JsonIgnore
-  public boolean isAccessible() {
-    long elapsedSeconds = Duration.between(date, LocalDateTime.now()).getSeconds();
-
-    return (views == 0 || views > viewCount) && (time == 0 || time > elapsedSeconds);
-  }
-
-  @JsonIgnore
-  public boolean isRestrictedByViews() {
-    return 0 < views;
-  }
-
-  @JsonIgnore
-  public boolean isRestrictedByTime() {
-    return 0 < time;
-  }
 
   public long getId() {
     return id;
@@ -83,7 +49,13 @@ public class CodeSnippet {
     return uuid;
   }
 
-  // For the sake of Thymeleaf
+  public Author getAuthor() {
+    return author;
+  }
+
+  public void setAuthor(Author author) {
+    this.author = author;
+  }
 
   public String getCode() {
     return code;
@@ -97,7 +69,91 @@ public class CodeSnippet {
     return date.format(FORMATTER);
   }
 
+  public long getTimeLimit() {
+    return timeLimit;
+  }
+
+  public void setTimeLimit(long timeLimit) {
+    this.timeLimit = timeLimit;
+    this.expiryDate = date.plusMinutes(timeLimit);
+  }
+
+  public LocalDateTime getExpiryDate() {
+    return expiryDate;
+  }
+
+  public void setExpiryDate(LocalDateTime expiryDate) {
+    this.expiryDate = expiryDate;
+  }
+
+  public long getViewCount() {
+    return viewCount;
+  }
+
+  public void setViewCount(long viewCount) {
+    this.viewCount = viewCount;
+  }
+
   public void increaseViewCount() {
-    viewCount += 1;
+    viewCount++;
+  }
+
+  public long getViewLimit() {
+    return viewLimit;
+  }
+
+  public void setViewLimit(long viewLimit) {
+    this.viewLimit = viewLimit;
+  }
+
+  //@JsonIgnore
+  public boolean isRestrictedByViews() {
+    return 0 < viewLimit;
+  }
+
+  //@JsonIgnore
+  public boolean isRestrictedByTime() {
+    return expiryDate != LocalDateTime.MIN;
+  }
+
+  @JsonIgnore
+  public boolean isAccessible() {
+    return (viewLimit == 0 || viewCount < viewLimit)
+        && (expiryDate == LocalDateTime.MIN || date.isBefore(expiryDate));
+  }
+
+  @JsonGetter("remainingSeconds")
+  public long getRemainingSeconds() {
+    if (expiryDate == LocalDateTime.MIN) {
+      return 0;
+    }
+    return date.isBefore(expiryDate) ? Duration.between(date, expiryDate).getSeconds() : 0;
+  }
+
+  @JsonGetter("remainingViews")
+  public long getRemainingViews() {
+    if (isRestrictedByTime()) {
+      return Math.max(viewLimit - viewCount, 0);
+    }
+    return 0;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    CodeSnippet that = (CodeSnippet) o;
+
+    return uuid.equals(that.uuid);
+  }
+
+  @Override
+  public int hashCode() {
+    return uuid.hashCode();
   }
 }
