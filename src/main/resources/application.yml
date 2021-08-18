@@ -14,8 +14,8 @@ spring:
   datasource:
     url: jdbc:h2:file:./code_snippets
     driverClassName: org.h2.Driver
-    username: hu.zza
-    password: 010101
+    username: "hu-zza"
+    password: "101101"
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate.ddl-auto: update

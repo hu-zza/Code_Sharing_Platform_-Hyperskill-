@@ -24,30 +24,39 @@ public class ApiController {
     RESPONSE_HEADERS.setContentType(MediaType.valueOf("application/json; charset=UTF-8"));
   }
 
-  private final CodeSnippetRepository repository;
+  private final AuthorRepository authorRepository;
+  private final CodeSnippetRepository codeSnippetRepository;
 
   @Autowired
-  private ApiController(CodeSnippetRepository repository) {
-    this.repository = repository;
+  private ApiController(AuthorRepository authorRepo, CodeSnippetRepository codeRepo) {
+    this.authorRepository = authorRepo;
+    this.codeSnippetRepository = codeRepo;
   }
 
   @PostMapping("/new")
   ResponseEntity<Map<String, String>> createCodeSnippet(@RequestBody CodeSnippet codeSnippet) {
-    var snippet = repository.save(codeSnippet);
+    var saved = codeSnippetRepository.save(codeSnippet);
 
-    return ResponseEntity.ok(Map.of("id", String.valueOf(snippet.getUuid())));
+    return ResponseEntity.ok(Map.of("id", String.valueOf(saved.getUuid())));
+  }
+
+  @PostMapping("/register")
+  ResponseEntity<Map<String, String>> createAuthor(@RequestBody Author author) {
+    var saved = authorRepository.save(author);
+
+    return ResponseEntity.ok(Map.of("id", String.valueOf(saved.getUuid())));
   }
 
   @GetMapping("/{uuid}")
   ResponseEntity<CodeSnippet> getByIdAsJson(@PathVariable String uuid) {
-    var optionalCodeSnippet = repository.findByUuid(uuid);
+    var optionalCodeSnippet = codeSnippetRepository.findByUuid(uuid);
 
     if (optionalCodeSnippet.isPresent()) {
       var codeSnippet = optionalCodeSnippet.get();
 
       if (codeSnippet.isAccessible()) {
         codeSnippet.increaseViewCount();
-        codeSnippet = repository.save(codeSnippet);
+        codeSnippet = codeSnippetRepository.save(codeSnippet);
 
         return ResponseEntity.ok(codeSnippet);
       }
@@ -59,10 +68,10 @@ public class ApiController {
 
   @GetMapping("/latest")
   ResponseEntity<List<CodeSnippet>> getLatest10AsJson() {
-    List<CodeSnippet> snippetList = repository.findLatest10();
+    List<CodeSnippet> snippetList = codeSnippetRepository.findLatest10();
 
     snippetList.forEach(CodeSnippet::increaseViewCount);
-    repository.saveAll(snippetList);
+    codeSnippetRepository.saveAll(snippetList);
 
     return ResponseEntity.ok(snippetList);
   }

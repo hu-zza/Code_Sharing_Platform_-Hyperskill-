@@ -1,6 +1,10 @@
 package hu.zza.hyperskill.snippets;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +17,7 @@ public class Author {
 
   private final String uuid = UUID.randomUUID().toString();
   private String name = "Unknown";
+  private String passwordHash = "";
   private String personal = "";
   private String github = "";
   private String linkedin = "";
@@ -31,6 +36,14 @@ public class Author {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public boolean checkPassword(String password) {
+    return getHexStringFromByteArray(getPasswordHashArray(password)).equals(passwordHash);
+  }
+
+  public void setPassword(String password) {
+    this.passwordHash = getHexStringFromByteArray(getPasswordHashArray(password));
   }
 
   public String getPersonal() {
@@ -74,5 +87,17 @@ public class Author {
   @Override
   public int hashCode() {
     return uuid.hashCode();
+  }
+
+  private String getHexStringFromByteArray(byte[] array) {
+    return new BigInteger(1, array).toString(16);
+  }
+
+  private byte[] getPasswordHashArray(String password) {
+    try {
+      return MessageDigest.getInstance("SHA3-512").digest(password.getBytes(StandardCharsets.UTF_8));
+    } catch (NoSuchAlgorithmException ignored) {
+      return new byte[0];
+    }
   }
 }

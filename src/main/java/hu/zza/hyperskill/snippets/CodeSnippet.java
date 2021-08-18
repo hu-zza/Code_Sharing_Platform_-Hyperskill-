@@ -11,12 +11,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 @JsonIgnoreProperties({"id", "timeLimit"})
 public class CodeSnippet {
+  private static final LocalDateTime NO_EXPIRY =
+      LocalDateTime.of(2000,1,1,0,0, 0, 0);
 
   private static final DateTimeFormatter FORMATTER =
       DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
@@ -25,9 +25,7 @@ public class CodeSnippet {
 
   private final String uuid = UUID.randomUUID().toString();
 
-  @ManyToOne
-  @JoinColumn(name = "author_uuid")
-  private Author author = null;
+  private String authorUuid = "-";
 
   @Column(columnDefinition = "text")
   private String code = "";
@@ -35,7 +33,7 @@ public class CodeSnippet {
   private final LocalDateTime date = LocalDateTime.now();
 
   private long timeLimit = 0L;
-  private LocalDateTime expiryDate = LocalDateTime.MIN;
+  private LocalDateTime expiryDate = NO_EXPIRY;
 
   private long viewCount = 0L;
   private long viewLimit = 0L;
@@ -49,12 +47,12 @@ public class CodeSnippet {
     return uuid;
   }
 
-  public Author getAuthor() {
-    return author;
+  public String getAuthorUuid() {
+    return authorUuid;
   }
 
-  public void setAuthor(Author author) {
-    this.author = author;
+  public void setAuthorUuid(String authorUuid) {
+    this.authorUuid = authorUuid;
   }
 
   public String getCode() {
@@ -74,8 +72,10 @@ public class CodeSnippet {
   }
 
   public void setTimeLimit(long timeLimit) {
-    this.timeLimit = timeLimit;
-    this.expiryDate = date.plusMinutes(timeLimit);
+    if (0 < timeLimit) {
+      this.timeLimit = timeLimit;
+      this.expiryDate = date.plusMinutes(timeLimit);
+    }
   }
 
   public LocalDateTime getExpiryDate() {
@@ -103,7 +103,9 @@ public class CodeSnippet {
   }
 
   public void setViewLimit(long viewLimit) {
-    this.viewLimit = viewLimit;
+    if (0 < viewLimit) {
+      this.viewLimit = viewLimit;
+    }
   }
 
   //@JsonIgnore
@@ -113,18 +115,18 @@ public class CodeSnippet {
 
   //@JsonIgnore
   public boolean isRestrictedByTime() {
-    return expiryDate != LocalDateTime.MIN;
+    return 0 < timeLimit;
   }
 
   @JsonIgnore
   public boolean isAccessible() {
     return (viewLimit == 0 || viewCount < viewLimit)
-        && (expiryDate == LocalDateTime.MIN || date.isBefore(expiryDate));
+        && (timeLimit == 0 || date.isBefore(expiryDate));
   }
 
   @JsonGetter("remainingSeconds")
   public long getRemainingSeconds() {
-    if (expiryDate == LocalDateTime.MIN) {
+    if (0 < timeLimit) {
       return 0;
     }
     return date.isBefore(expiryDate) ? Duration.between(date, expiryDate).getSeconds() : 0;

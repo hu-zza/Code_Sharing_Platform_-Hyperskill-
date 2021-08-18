@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/code")
 public class ViewController {
 
-  private final CodeSnippetRepository repository;
+  private final AuthorRepository authorRepository;
+  private final CodeSnippetRepository codeSnippetRepository;
 
   @Autowired
-  private ViewController(CodeSnippetRepository repository) {
-    this.repository = repository;
+  private ViewController(AuthorRepository authorRepo, CodeSnippetRepository codeRepo) {
+    this.authorRepository = authorRepo;
+    this.codeSnippetRepository = codeRepo;
   }
 
   // Without argument this maps "/" and "/code" at the same time...
@@ -35,24 +37,27 @@ public class ViewController {
 
   @PostMapping("/new")
   private String createCodeSnippet(CodeSnippet newSnippet) {
-    var snippet = repository.save(newSnippet);
+    var snippet = codeSnippetRepository.save(newSnippet);
     return String.format("redirect:/code/%s", snippet.getUuid());
   }
 
   @GetMapping("/{uuid}")
   private String getByIdView(@PathVariable String uuid, Map<String, Object> model) {
-    var optionalCodeSnippet = repository.findByUuid(uuid);
+    var optionalCodeSnippet = codeSnippetRepository.findByUuid(uuid);
 
     if (optionalCodeSnippet.isPresent()) {
       var codeSnippet = optionalCodeSnippet.get();
 
       if (codeSnippet.isAccessible()) {
         codeSnippet.increaseViewCount();
-        codeSnippet = repository.save(codeSnippet);
+        codeSnippet = codeSnippetRepository.save(codeSnippet);
 
         model.put("snippet", codeSnippet);
         return "singleSnippet";
       }
+
+      throw new SnippetExpiredException(
+          HttpStatus.FORBIDDEN, String.format("The code snippet (%s) has expired.", uuid));
     }
 
     throw new SnippetNotFoundException(
@@ -61,10 +66,10 @@ public class ViewController {
 
   @GetMapping("/latest")
   private String getLatest10View(Map<String, Object> model) {
-    List<CodeSnippet> latestTenSnippets = repository.findLatest10();
+    List<CodeSnippet> latestTenSnippets = codeSnippetRepository.findLatest10();
 
     latestTenSnippets.forEach(CodeSnippet::increaseViewCount);
-    repository.saveAll(latestTenSnippets);
+    codeSnippetRepository.saveAll(latestTenSnippets);
 
     model.put("latestTenSnippets", latestTenSnippets);
     return "latestSnippets";
