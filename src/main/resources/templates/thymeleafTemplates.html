@@ -9,7 +9,7 @@
 <body>
 
 
-  <div class="snippetInfo" th:fragment="snippetInfoButton (snippet, nrOnPage)">
+  <div class="snippetInfo" th:fragment="snippetInfoButton (author, snippet, nrOnPage)">
     <button type="button" class="btn btn-dark dropdown-toggle" th:id="'infoDropdownButton_' + ${nrOnPage}" id="infoDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet info">
       <i class="bi bi-info-lg"></i>
     </button>
@@ -22,25 +22,25 @@
       </li>
 
       <li>
-        <button type="button" class="dropdown-item text-primary" title="Author: Szabó László András">
-          <i class="bi bi-person-fill"></i> <span>Szabó László András</span>
+        <button type="button" class="dropdown-item text-primary" th:title="'Author: ' + ${author.name}" title="Author: Szabó László András">
+          <i class="bi bi-person-fill"></i> <span th:text="${author.name}">Szabó László András</span>
         </button>
       </li>
 
-      <li>
-        <a href="https://zza.hu" target="_blank" class="dropdown-item text-primary" title="Personal site">
-          <i class="bi bi-layout-text-sidebar-reverse"></i> Personal site: zza.hu
+      <li th:if="${author.personal} and ${author.personal} != ''">
+        <a th:href="@{${author.personal}}" href="https://zza.hu" target="_blank" class="dropdown-item text-primary" title="Personal site">
+          <i class="bi bi-layout-text-sidebar-reverse"></i> Personal site: <span th:text="@{${author.personal}}">https://zza.hu</span>
         </a>
       </li>
 
-      <li>
-        <a href="https://zza.hu/GitHub" target="_blank" class="dropdown-item text-primary" title="GitHub profile">
+      <li th:if="${author.github} and ${author.github} != ''">
+        <a th:href="@{${author.github}}" href="https://zza.hu/GitHub" target="_blank" class="dropdown-item text-primary" title="GitHub profile">
           <i class="bi bi-github"></i> Projects on GitHub
         </a>
       </li>
 
-      <li>
-        <a href="https://zza.hu/LinkedIn" target="_blank" class="dropdown-item text-primary" title="LinkedIn profile">
+      <li th:if="${author.linkedin} and ${author.linkedin} != ''">
+        <a th:href="@{${author.linkedin}}" href="https://zza.hu/LinkedIn" target="_blank" class="dropdown-item text-primary" title="LinkedIn profile">
           <i class="bi bi-linkedin"></i> LinkedIn profile
         </a>
       </li>
@@ -54,8 +54,8 @@
       </li>
 
       <li>
-        <button type="button" class="dropdown-item text-secondary font-monospace" title="Views: 237">
-          <i class="bi bi-eye-fill"></i> 237
+        <button type="button" class="dropdown-item text-secondary font-monospace" th:title="'Views: ' + ${snippet.viewCount}" title="Views: 237">
+          <i class="bi bi-eye-fill"></i> <span th:text="${snippet.viewCount}">237</span>
         </button>
       </li>
 
@@ -74,21 +74,21 @@
       </li>
 
       <li th:if="${snippet.isRestrictedByViews()}">
-        <button type="button" class="dropdown-item text-danger font-monospace" title="View limit: 300">
-          <i class="bi bi-eye-slash-fill"></i> 300
+        <button type="button" class="dropdown-item text-danger font-monospace" th:title="'View limit: ' + ${snippet.viewLimit}" title="View limit: 300">
+          <i class="bi bi-eye-slash-fill"></i> <span th:text="${snippet.viewLimit}">300</span>
         </button>
       </li>
 
       <li th:if="${snippet.isRestrictedByTime()}">
-        <button type="button" class="dropdown-item text-danger font-monospace" title="Expiry: 2020/02/02 22:22:22">
-          <i class="bi bi-calendar-x"></i> 2020/02/02 22:22:22
+        <button type="button" class="dropdown-item text-danger font-monospace" th:title="'Expiry: ' + ${snippet.expiryDate}"  title="Expiry: 2020/02/02 22:22:22">
+          <i class="bi bi-calendar-x"></i> <span th:text="${snippet.expiryDate}">2020/02/02 22:22:22</span>
         </button>
       </li>
     </ul>
   </div>
 
 
-  <div class="snippetAction" th:fragment="snippetActionButtons (snippet, nrOnPage)">
+  <div class="snippetAction" th:fragment="snippetActionButtons (author, snippet, nrOnPage)">
     <button type="button" class="btn btn-dark dropdown-toggle" th:id="'actionDropdownButton_' + ${nrOnPage}" id="actionDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" title="Show code snippet actions">
       <i class="bi bi-three-dots"></i>
     </button>

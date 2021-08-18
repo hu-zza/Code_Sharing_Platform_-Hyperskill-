@@ -9,10 +9,14 @@ import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 @JsonIgnoreProperties({"id"})
 public class Author {
+  @Transient
+  public static final Author UNKNOWN = new Author();
+
   @Id @GeneratedValue private long id = 0L;
 
   private final String uuid = UUID.randomUUID().toString();

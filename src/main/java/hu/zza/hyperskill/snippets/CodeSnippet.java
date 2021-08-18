@@ -78,8 +78,8 @@ public class CodeSnippet {
     }
   }
 
-  public LocalDateTime getExpiryDate() {
-    return expiryDate;
+  public String getExpiryDate() {
+    return expiryDate.format(FORMATTER);
   }
 
   public void setExpiryDate(LocalDateTime expiryDate) {
@@ -121,7 +121,7 @@ public class CodeSnippet {
   @JsonIgnore
   public boolean isAccessible() {
     return (viewLimit == 0 || viewCount < viewLimit)
-        && (timeLimit == 0 || date.isBefore(expiryDate));
+        && (timeLimit == 0 || LocalDateTime.now().isBefore(expiryDate));
   }
 
   @JsonGetter("remainingSeconds")

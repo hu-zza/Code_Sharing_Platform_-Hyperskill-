@@ -2,6 +2,7 @@ package hu.zza.hyperskill.snippets;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/code")
 public class ViewController {
-
   private final AuthorRepository authorRepository;
   private final CodeSnippetRepository codeSnippetRepository;
 
@@ -53,6 +53,7 @@ public class ViewController {
         codeSnippet = codeSnippetRepository.save(codeSnippet);
 
         model.put("snippet", codeSnippet);
+        model.put("author", authorRepository.getByUuid(codeSnippet.getUuid()));
         return "singleSnippet";
       }
 
@@ -67,11 +68,17 @@ public class ViewController {
   @GetMapping("/latest")
   private String getLatest10View(Map<String, Object> model) {
     List<CodeSnippet> latestTenSnippets = codeSnippetRepository.findLatest10();
+    List<Author> latestTenAuthors =
+        latestTenSnippets.stream()
+            .map(CodeSnippet::getAuthorUuid)
+            .map(authorRepository::getByUuid)
+            .collect(Collectors.toList());
 
     latestTenSnippets.forEach(CodeSnippet::increaseViewCount);
     codeSnippetRepository.saveAll(latestTenSnippets);
 
     model.put("latestTenSnippets", latestTenSnippets);
+    model.put("latestTenAuthors", latestTenAuthors);
     return "latestSnippets";
   }
 
