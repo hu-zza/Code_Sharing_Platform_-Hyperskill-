@@ -31,7 +31,7 @@
             <div class="row mb-5 mt-3">
               <div class="col">
                 <div class="form-floating">
-                  <input id="author" th:field="*{authorUuid}" class="form-control" type="text" placeholder="Author">
+                  <input id="author" th:value="${author}" class="form-control" type="text" placeholder="Author" disabled>
                   <label for="author" class="form-label">Author</label>
                 </div>
               </div>

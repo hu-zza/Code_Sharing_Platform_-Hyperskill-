@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,7 +67,7 @@ public class ViewController {
 
         var cookie = new Cookie("uuid", author.getUuid());
         cookie.setHttpOnly(true);
-        cookie.setMaxAge(credentials.isRemember() ? 1_166_000 : 0);
+        cookie.setMaxAge(credentials.isRemember() ? 1_166_000 : 360);
         response.addCookie(cookie);
       }
     }
@@ -75,13 +76,17 @@ public class ViewController {
   }
 
   @GetMapping("/code/new")
-  private String getSendingFormView(Map<String, Object> model) {
+  private String getSendingFormView(Map<String, Object> model, @CookieValue(defaultValue = "") String uuid) {
     model.put("newSnippet", new CodeSnippet());
+    String name = authorRepository.getByUuid(uuid).getName();
+    System.out.println(name);
+    model.put("author", name);
     return "createSnippet";
   }
 
   @PostMapping("/code/new")
-  private String createCodeSnippet(CodeSnippet newSnippet) {
+  private String createCodeSnippet(CodeSnippet newSnippet, @CookieValue(defaultValue = "") String uuid) {
+    newSnippet.setAuthorUuid(uuid);
     var snippet = codeSnippetRepository.save(newSnippet);
     return String.format("redirect:/code/%s", snippet.getUuid());
   }
@@ -98,7 +103,7 @@ public class ViewController {
         codeSnippet = codeSnippetRepository.save(codeSnippet);
 
         model.put("snippet", codeSnippet);
-        model.put("author", authorRepository.getByUuid(codeSnippet.getUuid()));
+        model.put("author", authorRepository.getByUuid(codeSnippet.getAuthorUuid()));
         return "singleSnippet";
       }
 
