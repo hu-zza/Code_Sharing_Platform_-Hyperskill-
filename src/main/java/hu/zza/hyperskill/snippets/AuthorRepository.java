@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Long> {
+  Optional<Author> findByEmail(String email);
   Optional<Author> findByUuid(String uuid);
 
   default Author getByUuid(String uuid) {

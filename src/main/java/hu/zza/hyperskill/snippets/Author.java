@@ -16,11 +16,15 @@ import javax.persistence.Transient;
 public class Author {
   @Transient
   public static final Author UNKNOWN = new Author();
+  static {
+    UNKNOWN.name = "Unknown";
+  }
 
   @Id @GeneratedValue private long id = 0L;
 
   private final String uuid = UUID.randomUUID().toString();
-  private String name = "Unknown";
+  private String name = "";
+  private String email = "";
   private String passwordHash = "";
   private String personal = "";
   private String github = "";
@@ -42,12 +46,25 @@ public class Author {
     this.name = name;
   }
 
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
   public boolean checkPassword(String password) {
     return getHexStringFromByteArray(getPasswordHashArray(password)).equals(passwordHash);
   }
 
   public void setPassword(String password) {
     this.passwordHash = getHexStringFromByteArray(getPasswordHashArray(password));
+  }
+
+  // An ugly fix to prepend there is a password field.
+  public String getPassword() {
+    return "";
   }
 
   public String getPersonal() {
