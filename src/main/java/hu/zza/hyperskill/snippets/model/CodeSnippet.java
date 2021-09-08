@@ -1,4 +1,4 @@
-package hu.zza.hyperskill.snippets;
+package hu.zza.hyperskill.snippets.model;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;

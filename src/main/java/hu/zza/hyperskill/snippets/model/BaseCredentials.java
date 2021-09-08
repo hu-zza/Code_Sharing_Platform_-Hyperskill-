@@ -1,4 +1,4 @@
-package hu.zza.hyperskill.snippets;
+package hu.zza.hyperskill.snippets.model;
 
 public class BaseCredentials {
   private String email;

@@ -1,4 +1,4 @@
-package hu.zza.hyperskill.snippets;
+package hu.zza.hyperskill.snippets.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

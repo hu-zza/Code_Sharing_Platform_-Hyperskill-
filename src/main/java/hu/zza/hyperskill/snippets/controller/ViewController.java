@@ -1,5 +1,12 @@
-package hu.zza.hyperskill.snippets;
+package hu.zza.hyperskill.snippets.controller;
 
+import hu.zza.hyperskill.snippets.model.Author;
+import hu.zza.hyperskill.snippets.model.BaseCredentials;
+import hu.zza.hyperskill.snippets.model.CodeSnippet;
+import hu.zza.hyperskill.snippets.exception.SnippetExpiredException;
+import hu.zza.hyperskill.snippets.exception.SnippetNotFoundException;
+import hu.zza.hyperskill.snippets.repository.AuthorRepository;
+import hu.zza.hyperskill.snippets.repository.CodeSnippetRepository;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package hu.zza.hyperskill.snippets;
+package hu.zza.hyperskill.snippets.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.AnnotationUtils;

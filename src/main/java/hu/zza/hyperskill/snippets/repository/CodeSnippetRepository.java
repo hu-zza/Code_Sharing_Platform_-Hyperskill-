@@ -1,5 +1,6 @@
-package hu.zza.hyperskill.snippets;
+package hu.zza.hyperskill.snippets.repository;
 
+import hu.zza.hyperskill.snippets.model.CodeSnippet;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;

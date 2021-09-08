@@ -1,5 +1,6 @@
-package hu.zza.hyperskill.snippets;
+package hu.zza.hyperskill.snippets.repository;
 
+import hu.zza.hyperskill.snippets.model.Author;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
