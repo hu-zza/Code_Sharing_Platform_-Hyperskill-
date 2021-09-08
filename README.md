@@ -16,6 +16,7 @@ You will get acquainted with server development on Spring Boot and touch on some
   
   
 #### Project page: https://hyperskill.org/projects/130
+[My basic solution (v1.0)](https://github.com/hu-zza/Code_Sharing_Platform_-Hyperskill-/releases/tag/v1.0)
 
 ---
 
