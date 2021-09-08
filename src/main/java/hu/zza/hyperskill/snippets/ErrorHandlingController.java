@@ -2,15 +2,15 @@ package hu.zza.hyperskill.snippets;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ErrorHandlingController {
   @ExceptionHandler(Exception.class)
-  public ModelAndView handleError(HttpServletRequest request, Exception exception)
+  public String handleError(HttpServletRequest request, Exception exception, Model model)
       throws Exception {
 
     // Rethrow the exceptions with @ResponseStatus annotation.
@@ -18,10 +18,8 @@ public class ErrorHandlingController {
       throw exception;
     }
 
-    ModelAndView mav = new ModelAndView();
-    mav.addObject("exception", exception);
-    mav.addObject("url", request.getRequestURL());
-    mav.setViewName("error");
-    return mav;
+    model.addAttribute("exception", exception);
+    model.addAttribute("url", request.getRequestURL());
+    return "error";
   }
 }
